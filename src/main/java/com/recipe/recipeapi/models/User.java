@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 @Data
 @Table(name="TB_USER")
-public class User {
+public class User extends Abstract{
 	
 	private static final long serialVersionUID = -7169638148702718527L;
 
