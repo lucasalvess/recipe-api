@@ -6,7 +6,7 @@ Manager of recipes.
 
 Java Open jdk version 11.0.2
 
-Gradlew 6.0.1
+Gradle 6.0.1
 
 ## Build 
 
