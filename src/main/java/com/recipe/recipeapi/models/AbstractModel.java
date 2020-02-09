@@ -2,6 +2,7 @@ package com.recipe.recipeapi.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,4 +20,6 @@ public abstract class AbstractModel implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Column(nullable = false)
+	private Boolean deleted = Boolean.FALSE;
 }
