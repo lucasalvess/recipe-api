@@ -30,4 +30,12 @@ public interface UserResourceDocumentation {
 	@ApiOperation(value = "Update an user (you can also create here)")
 	@ApiResponse(code = 200, message = "Ok", response = User.class)
 	public User update(@RequestBody User user);
+	
+	@ApiOperation(value = "Logical exclusion of an User")
+	@ApiResponse(code = 204, message = "Deleted")
+	public void delete(@PathVariable String uuid) throws Exception;
+	
+	@ApiOperation(value = "Do you get an user by Uuid code")
+	@ApiResponse(code = 200, message = "Ok", response = User.class)
+	public User findByUuid(@PathVariable String uuid);
 }
