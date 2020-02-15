@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.recipe.recipeapi.models.User;
+import com.recipe.recipeapi.models.dto.UserDTO;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -17,19 +18,19 @@ public interface UserResourceDocumentation {
 	
 	@ApiOperation(value = "Sign in with you login and password")
 	@ApiResponse(code = 200, message = "Ok", response = User.class)
-	public User login(@PathVariable String login,@PathVariable String password);
+	public UserDTO login(@PathVariable String login,@PathVariable String password);
 	
 	@ApiOperation(value = "List all users")
 	@ApiResponse(code = 200, message = "Ok", response = User.class)
-	public List<User> list();
+	public List<UserDTO> list();
 	
 	@ApiOperation(value = "Create a new user")
 	@ApiResponse(code = 201, message = "Ok", response = User.class)
-	public User save(@RequestBody User user);
+	public UserDTO save(@RequestBody User user);
 	
 	@ApiOperation(value = "Update an user (you can also create here)")
 	@ApiResponse(code = 200, message = "Ok", response = User.class)
-	public User update(@RequestBody User user);
+	public UserDTO update(@RequestBody User user);
 	
 	@ApiOperation(value = "Logical exclusion of an User")
 	@ApiResponse(code = 204, message = "Deleted")
@@ -37,5 +38,5 @@ public interface UserResourceDocumentation {
 	
 	@ApiOperation(value = "Do you get an user by Uuid code")
 	@ApiResponse(code = 200, message = "Ok", response = User.class)
-	public User findByUuid(@PathVariable String uuid);
+	public UserDTO findByUuid(@PathVariable String uuid);
 }

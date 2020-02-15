@@ -1,5 +1,6 @@
 package com.recipe.recipeapi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.recipeapi.models.User;
+import com.recipe.recipeapi.models.dto.UserDTO;
 import com.recipe.recipeapi.repository.UserRepository;
 
 @Service
@@ -20,25 +22,32 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User findByUuid(String uuid) {
+	private static final UserDTO userDTO = new UserDTO();
+
+	public UserDTO findByUuid(String uuid) {
 		Optional<User> user = userRepository.findByUuid(UUID.fromString(uuid));
-		return user.orElseThrow(() -> new EntityNotFoundException(UUID_NOT_FOUND));
+		
+		if(!user.isEmpty()) {
+			return userDTO.converter(user.get());
+		}
+
+		throw new EntityNotFoundException(UUID_NOT_FOUND);
 	}
 	
-	public User updateUser(User userForm) {
-		return userRepository.save(userForm);
+	public UserDTO updateUser(User userForm) {
+		return userDTO.converter(userRepository.save(userForm));
 	}
 
-	public List<User> listUsers() {
-		return userRepository.findAll();
+	public List<UserDTO> listUsers() {
+		return userDTO.convertAList(userRepository.findAll());
 	}
 
-	public User login(String login, String password) {
-		return userRepository.findByLoginAndPassword(login, password);
+	public UserDTO login(String login, String password) {
+		return userDTO.converter(userRepository.findByLoginAndPassword(login, password));
 	}
 
-	public User createUser(User user) {
-		return userRepository.save(user);
+	public UserDTO createUser(User user) {
+		return userDTO.converter(userRepository.save(user));
 	}
 
 	public void deleteUser(String uuid) throws Exception {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recipe.recipeapi.models.User;
+import com.recipe.recipeapi.models.dto.UserDTO;
 import com.recipe.recipeapi.repository.UserRepository;
 import com.recipe.recipeapi.resource.documentation.UserResourceDocumentation;
 import com.recipe.recipeapi.service.UserService;
@@ -25,34 +26,31 @@ import com.recipe.recipeapi.service.UserService;
 public class UserResource implements UserResourceDocumentation {
 
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
 	private UserService userService;
 	
 	@GetMapping(path = "/{login}/{password}")
-	public User login(@PathVariable String login,@PathVariable String password) {
+	public UserDTO login(@PathVariable String login,@PathVariable String password) {
 		return userService.login(login, password);
 	}
 	
 	@GetMapping
-	public List<User> list() {
+	public List<UserDTO> list() {
 		return userService.listUsers();
 	}
 	
 	@GetMapping(path = "/{uuid}")
-	public User findByUuid(@PathVariable String uuid){
+	public UserDTO findByUuid(@PathVariable String uuid){
 		return userService.findByUuid(uuid);
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User save(@RequestBody User user){
+	public UserDTO save(@RequestBody User user){
 		return userService.createUser(user);
 		
 	}
 	
 	@PatchMapping
-	public User update(@RequestBody User user) {
+	public UserDTO update(@RequestBody User user) {
 		return userService.updateUser(user);
 	}
 	
