@@ -45,9 +45,8 @@ public class UserDTO implements Serializable {
 	
 	public List<UserDTO> convertAList(List<User> userList){
 		List<UserDTO> listDTO = new ArrayList<UserDTO>();
-		for (User user : userList) {
-			listDTO.add(this.converter(user));
-		}
+
+		userList.forEach(u -> listDTO.add(new UserDTO(u)));
 		return listDTO;
 	}
 }
