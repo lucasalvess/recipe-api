@@ -40,6 +40,17 @@ public class IngredientService {
 			throw new NotFoundException("Ingredient list Empty");
 		}
 	}
+
+	public boolean deleteIngredientByUuid(UUID uuid) {
+		try {
+			Ingredient ingredient = ingredientRepository.findByUuid(uuid);
+			ingredient.setDeleted(true);
+			ingredientRepository.save(ingredient);
+			return true;
+		} catch (RuntimeException e) {
+			throw new NotFoundException(UUID_NOT_FOUND);
+		}
+	}
 	
 	
 }

@@ -3,6 +3,8 @@ package com.recipe.recipeapi.resource.documentation;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,7 +20,7 @@ import io.swagger.annotations.ApiResponses;
 public interface IngredientResourceDocumentation {
 	
 	@ApiOperation(value = "Create a new Ingredient")
-	@ApiResponse(code = 200, message = "Ok", response = Ingredient.class)
+	@ApiResponse(code = 201, message = "Ok", response = Ingredient.class)
 	public IngredientDTO create(@RequestBody Ingredient ingredient);
 	
 	@ApiOperation(value = "Find ingredient by uuid")
@@ -28,4 +30,8 @@ public interface IngredientResourceDocumentation {
 	@ApiOperation(value = "List all ingredients")
 	@ApiResponse(code = 200, message = "Ok", response = Ingredient.class)
 	public List<IngredientDTO> list();
+	
+	@ApiOperation(value = "Delete an ingredient by uuid")
+	@ApiResponse(code = 204, message = "Ok", response = Ingredient.class)
+	public void delete(@PathVariable UUID uuid, HttpServletResponse response);
 }
