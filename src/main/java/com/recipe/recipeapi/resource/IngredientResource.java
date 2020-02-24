@@ -1,5 +1,6 @@
 package com.recipe.recipeapi.resource;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class IngredientResource implements IngredientResourceDocumentation {
 	@GetMapping(path = "/{uuid}")
 	public IngredientDTO findByUuid(@PathVariable UUID uuid) {
 		return ingredientService.findIngredientByUuid(uuid);
+	}
+	
+	@GetMapping
+	public List<IngredientDTO> list(){
+		return ingredientService.listAllIngredients();
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.recipe.recipeapi.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,14 @@ public class IngredientService {
 			return ingredientDTO.converter(ingredientRepository.findByUuid(uuid));
 		} catch (RuntimeException e) {
 			throw new NotFoundException(UUID_NOT_FOUND);
+		}
+	}
+
+	public List<IngredientDTO> listAllIngredients() {
+		try {
+			return ingredientDTO.convertAList(ingredientRepository.findAll());
+		} catch (RuntimeException e) {
+			throw new NotFoundException("Ingredient list Empty");
 		}
 	}
 	

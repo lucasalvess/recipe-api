@@ -1,5 +1,6 @@
 package com.recipe.recipeapi.resource.documentation;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,4 +24,8 @@ public interface IngredientResourceDocumentation {
 	@ApiOperation(value = "Find ingredient by uuid")
 	@ApiResponse(code = 200, message = "Ok", response = Ingredient.class)
 	public IngredientDTO findByUuid(@PathVariable UUID uuid);
+	
+	@ApiOperation(value = "List all ingredients")
+	@ApiResponse(code = 200, message = "Ok", response = Ingredient.class)
+	public List<IngredientDTO> list();
 }
