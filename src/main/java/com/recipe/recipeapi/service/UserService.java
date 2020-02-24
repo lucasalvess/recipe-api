@@ -1,5 +1,6 @@
 package com.recipe.recipeapi.service;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,6 +10,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.recipe.recipeapi.exception.InvalidParametersException;
+import com.recipe.recipeapi.exception.NotFoundException;
 import com.recipe.recipeapi.models.User;
 import com.recipe.recipeapi.models.dto.UserDTO;
 import com.recipe.recipeapi.repository.UserRepository;
@@ -24,13 +27,14 @@ public class UserService {
 	private static final UserDTO userDTO = new UserDTO();
 
 	public UserDTO findByUuid(String uuid) {
-		Optional<User> user = userRepository.findByUuid(UUID.fromString(uuid));
+		Optional<User> user;
 		
-		if(!user.isEmpty()) {
+		try {
+			user = userRepository.findByUuid(UUID.fromString(uuid));
 			return userDTO.converter(user.get());
+		}catch (Exception e) {
+			throw new NotFoundException(UUID_NOT_FOUND);
 		}
-
-		throw new EntityNotFoundException(UUID_NOT_FOUND);
 	}
 	
 	public UserDTO updateUser(User userForm) {
@@ -42,7 +46,14 @@ public class UserService {
 	}
 
 	public UserDTO login(String login, String password) {
-		return userDTO.converter(userRepository.findByLoginAndPassword(login, password));
+		try {
+			return userDTO.converter(userRepository.findByLoginAndPassword(login, password));
+		}catch (InvalidParameterException e) {
+			throw new InvalidParametersException("Invalid login and password");
+		}catch (RuntimeException e) {
+			throw new NotFoundException("User not found");
+		}
+
 	}
 
 	public UserDTO createUser(User user) {
@@ -53,7 +64,7 @@ public class UserService {
 		Optional<User> user  = userRepository.findByUuid(UUID.fromString(uuid)); 
 		
 		if (!user.isPresent())
-			throw new Exception(UUID_NOT_FOUND);
+			throw new NotFoundException(UUID_NOT_FOUND);
 
 		user.get().setDeleted(Boolean.TRUE);
 		userRepository.save(user.get());
