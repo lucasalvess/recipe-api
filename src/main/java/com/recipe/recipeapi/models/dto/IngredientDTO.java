@@ -32,8 +32,9 @@ public class IngredientDTO implements Serializable {
 	
 	public IngredientDTO converter(Ingredient ingredient) {
 		
-		return builder()
-				.nome(ingredient.getNome())
-				.uuid(ingredient.getUuid()).build();
+		this.nome = ingredient.getNome();
+		this.uuid = ingredient.getUuid();		
+
+		return this;
 	}
 }

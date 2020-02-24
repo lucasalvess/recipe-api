@@ -10,13 +10,17 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Where(clause = "deleted = 0")
 @Table(name = "TB_INGREDIENT")
 public class Ingredient extends AbstractModel implements Serializable{
