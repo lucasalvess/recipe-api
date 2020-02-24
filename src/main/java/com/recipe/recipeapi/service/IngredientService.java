@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.recipe.recipeapi.exception.InvalidParametersException;
 import com.recipe.recipeapi.exception.NotFoundException;
 import com.recipe.recipeapi.models.Ingredient;
 import com.recipe.recipeapi.models.dto.IngredientDTO;
@@ -50,6 +51,15 @@ public class IngredientService {
 		} catch (RuntimeException e) {
 			throw new NotFoundException(UUID_NOT_FOUND);
 		}
+	}
+
+	public IngredientDTO updateIngredient(Ingredient ingredient) {
+		try {
+			return ingredientDTO.converter(ingredientRepository.save(ingredient));
+		}catch (RuntimeException e) {
+			throw new InvalidParametersException("Invalid Ingredient body");
+		}
+		
 	}
 	
 	

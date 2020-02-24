@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,11 @@ public class IngredientResource implements IngredientResourceDocumentation {
 		if(ingredientService.deleteIngredientByUuid(uuid)) {
 			response.setStatus(HttpStatus.NO_CONTENT.value());
 		}
+	}
+	
+	@PatchMapping
+	public IngredientDTO update(@RequestBody Ingredient ingredient) {
+		return ingredientService.updateIngredient(ingredient);
 	}
 
 }
