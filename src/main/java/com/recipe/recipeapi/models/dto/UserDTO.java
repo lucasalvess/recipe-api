@@ -34,14 +34,6 @@ public class UserDTO implements Serializable {
 		this.login = user.getLogin();
 		this.password = user.getPassword();
 	}
-
-	public UserDTO converter(User user) {
-		this.id = user.getUuid();
-		this.name = user.getName();
-		this.login = user.getLogin();
-		this.password = user.getPassword();
-		return this;
-	}
 	
 	public List<UserDTO> convertAList(List<User> userList){
 		List<UserDTO> listDTO = new ArrayList<UserDTO>();

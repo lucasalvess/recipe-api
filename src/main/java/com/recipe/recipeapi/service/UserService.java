@@ -31,14 +31,14 @@ public class UserService {
 		
 		try {
 			user = userRepository.findByUuid(UUID.fromString(uuid));
-			return userDTO.converter(user.get());
+			return new UserDTO(user.get());
 		}catch (Exception e) {
 			throw new NotFoundException(UUID_NOT_FOUND);
 		}
 	}
 	
 	public UserDTO updateUser(User userForm) {
-		return userDTO.converter(userRepository.save(userForm));
+		return new UserDTO(userRepository.save(userForm));
 	}
 
 	public List<UserDTO> listUsers() {
@@ -47,7 +47,7 @@ public class UserService {
 
 	public UserDTO login(String login, String password) {
 		try {
-			return userDTO.converter(userRepository.findByLoginAndPassword(login, password));
+			return new UserDTO(userRepository.findByLoginAndPassword(login, password));
 		}catch (InvalidParameterException e) {
 			throw new InvalidParametersException("Invalid login and password");
 		}catch (RuntimeException e) {
@@ -57,7 +57,7 @@ public class UserService {
 	}
 
 	public UserDTO createUser(User user) {
-		return userDTO.converter(userRepository.save(user));
+		return new UserDTO(userRepository.save(user));
 	}
 
 	public void deleteUser(String uuid) throws Exception {

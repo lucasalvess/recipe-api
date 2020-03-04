@@ -33,14 +33,6 @@ public class IngredientDTO implements Serializable {
 		this.nome = ingredient.getNome();
 	}
 	
-	public IngredientDTO converter(Ingredient ingredient) {
-		
-		this.nome = ingredient.getNome();
-		this.uuid = ingredient.getUuid();		
-
-		return this;
-	}
-	
 	public List<IngredientDTO> convertAList(List<Ingredient> ingredientList){
 		List<IngredientDTO> listDTO = new ArrayList<IngredientDTO>();
 

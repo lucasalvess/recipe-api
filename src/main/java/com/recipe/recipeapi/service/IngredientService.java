@@ -23,12 +23,12 @@ public class IngredientService {
 	private static final IngredientDTO ingredientDTO = new IngredientDTO();
 	
 	public IngredientDTO createIngredient(Ingredient ingredient) {
-		return ingredientDTO.converter(ingredientRepository.save(ingredient));
+		return new IngredientDTO(ingredientRepository.save(ingredient));
 	}
 	
 	public IngredientDTO findIngredientByUuid(UUID uuid) {
 		try {
-			return ingredientDTO.converter(ingredientRepository.findByUuid(uuid));
+			return new IngredientDTO(ingredientRepository.findByUuid(uuid));
 		} catch (RuntimeException e) {
 			throw new NotFoundException(UUID_NOT_FOUND);
 		}
@@ -55,7 +55,9 @@ public class IngredientService {
 
 	public IngredientDTO updateIngredient(Ingredient ingredient) {
 		try {
-			return ingredientDTO.converter(ingredientRepository.save(ingredient));
+			Ingredient ingredientOld =ingredientRepository.findByUuid(ingredient.getUuid());
+			ingredientOld = ingredient;
+			return new IngredientDTO(ingredientRepository.save(ingredientOld));
 		}catch (RuntimeException e) {
 			throw new InvalidParametersException("Invalid Ingredient body");
 		}
