@@ -20,7 +20,7 @@ public class UserDTO implements Serializable {
 	
 	private static final long serialVersionUID = 9035680108624403643L;
 	
-	private UUID id;
+	private UUID uuid;
 	
 	private String name;
 	
@@ -29,7 +29,7 @@ public class UserDTO implements Serializable {
 	private String password;
 	
 	public UserDTO (User user) {
-		this.id = user.getUuid();
+		this.uuid = user.getUuid();
 		this.name = user.getName();
 		this.login = user.getLogin();
 		this.password = user.getPassword();
