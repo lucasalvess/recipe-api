@@ -18,7 +18,7 @@ import com.recipe.recipeapi.repository.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	private static final String UUID_NOT_FOUND = "UUID not found!";
 
 	@Autowired
@@ -28,17 +28,29 @@ public class UserService {
 
 	public UserDTO findByUuid(String uuid) {
 		Optional<User> user;
-		
+
 		try {
 			user = userRepository.findByUuid(UUID.fromString(uuid));
 			return new UserDTO(user.get());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new NotFoundException(UUID_NOT_FOUND);
 		}
 	}
-	
+
 	public UserDTO updateUser(User userForm) {
-		return new UserDTO(userRepository.save(userForm));
+		try {
+
+			Optional<User> user = userRepository.findByUuid(userForm.getUuid());
+
+			user.get().setName(userForm.getName());
+			user.get().setLogin(userForm.getLogin());
+			user.get().setPassword(userForm.getPassword());
+
+			return new UserDTO(userRepository.save(user.get()));
+		} catch (RuntimeException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 	public List<UserDTO> listUsers() {
@@ -48,9 +60,9 @@ public class UserService {
 	public UserDTO login(String login, String password) {
 		try {
 			return new UserDTO(userRepository.findByLoginAndPassword(login, password));
-		}catch (InvalidParameterException e) {
+		} catch (InvalidParameterException e) {
 			throw new InvalidParametersException("Invalid login and password");
-		}catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw new NotFoundException("User not found");
 		}
 
@@ -61,8 +73,8 @@ public class UserService {
 	}
 
 	public void deleteUser(String uuid) throws Exception {
-		Optional<User> user  = userRepository.findByUuid(UUID.fromString(uuid)); 
-		
+		Optional<User> user = userRepository.findByUuid(UUID.fromString(uuid));
+
 		if (!user.isPresent())
 			throw new NotFoundException(UUID_NOT_FOUND);
 
