@@ -1,6 +1,7 @@
 package com.recipe.recipeapi.resource;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.recipe.recipeapi.models.User;
 import com.recipe.recipeapi.models.dto.UserDTO;
-import com.recipe.recipeapi.repository.UserRepository;
+import com.recipe.recipeapi.models.form.UserForm;
 import com.recipe.recipeapi.resource.documentation.UserResourceDocumentation;
 import com.recipe.recipeapi.service.UserService;
 
@@ -44,14 +45,14 @@ public class UserResource implements UserResourceDocumentation {
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO save(@RequestBody User user){
-		return userService.createUser(user);
+	public UserDTO save(@RequestBody UserForm user){
+		return userService.createUser(user.convertToEntity());
 		
 	}
 	
-	@PatchMapping
-	public UserDTO update(@RequestBody User user) {
-		return userService.updateUser(user);
+	@PatchMapping(path = "user/{userId}")
+	public UserDTO update(@RequestBody User userForm, @PathVariable UUID userId) {
+		return userService.updateUser(userForm, userId);
 	}
 	
 	@DeleteMapping(path = "/{uuid}")
