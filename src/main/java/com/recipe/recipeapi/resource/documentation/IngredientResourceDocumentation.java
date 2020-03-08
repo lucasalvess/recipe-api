@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.recipe.recipeapi.models.Ingredient;
 import com.recipe.recipeapi.models.dto.IngredientDTO;
+import com.recipe.recipeapi.models.form.IngredientForm;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,7 +22,7 @@ public interface IngredientResourceDocumentation {
 	
 	@ApiOperation(value = "Create a new Ingredient")
 	@ApiResponse(code = 201, message = "Ok", response = Ingredient.class)
-	public IngredientDTO create(@RequestBody Ingredient ingredient);
+	public IngredientDTO create(@RequestBody IngredientForm ingredient);
 	
 	@ApiOperation(value = "Find ingredient by uuid")
 	@ApiResponse(code = 200, message = "Ok", response = Ingredient.class)

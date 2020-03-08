@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.recipe.recipeapi.models.Ingredient;
 import com.recipe.recipeapi.models.dto.IngredientDTO;
+import com.recipe.recipeapi.models.form.IngredientForm;
 import com.recipe.recipeapi.resource.documentation.IngredientResourceDocumentation;
 import com.recipe.recipeapi.service.IngredientService;
 
@@ -30,8 +31,8 @@ public class IngredientResource implements IngredientResourceDocumentation {
 	private IngredientService ingredientService;
 		
 	@PostMapping
-	public IngredientDTO create(@RequestBody Ingredient ingredient) {
-		return ingredientService.createIngredient(ingredient);
+	public IngredientDTO create(@RequestBody IngredientForm ingredient) {
+		return ingredientService.createIngredient(ingredient.convertToEntity());
 	}
 	
 	@GetMapping(path = "/{uuid}")

@@ -26,11 +26,11 @@ public class IngredientDTO implements Serializable {
 	private UUID uuid;
 	
 	@Column(nullable = false)
-	private String nome;
+	private String name;
 	
 	public IngredientDTO(Ingredient ingredient) {
 		this.uuid = ingredient.getUuid();
-		this.nome = ingredient.getNome();
+		this.name = ingredient.getName();
 	}
 	
 	public List<IngredientDTO> convertAList(List<Ingredient> ingredientList){

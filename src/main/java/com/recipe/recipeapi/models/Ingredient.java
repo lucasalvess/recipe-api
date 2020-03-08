@@ -34,5 +34,5 @@ public class Ingredient extends AbstractModel implements Serializable{
 	private UUID uuid = UUID.randomUUID();
 	
 	@Column(nullable = false)
-	private String nome;
+	private String name;
 }
