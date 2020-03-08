@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.recipe.recipeapi.models.User;
 import com.recipe.recipeapi.models.dto.UserDTO;
 import com.recipe.recipeapi.models.form.UserForm;
+import com.recipe.recipeapi.models.form.UserFormPut;
 import com.recipe.recipeapi.resource.documentation.UserResourceDocumentation;
 import com.recipe.recipeapi.service.UserService;
 
@@ -50,9 +51,9 @@ public class UserResource implements UserResourceDocumentation {
 		
 	}
 	
-	@PatchMapping(path = "user/{userId}")
-	public UserDTO update(@RequestBody User userForm, @PathVariable UUID userId) {
-		return userService.updateUser(userForm, userId);
+	@PutMapping
+	public UserDTO update(@RequestBody UserFormPut userForm) {
+		return userService.updateUser(userForm.convertToEntity());
 	}
 	
 	@DeleteMapping(path = "/{uuid}")

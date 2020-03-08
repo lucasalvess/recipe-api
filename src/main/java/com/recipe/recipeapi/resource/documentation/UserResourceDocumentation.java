@@ -1,7 +1,6 @@
 package com.recipe.recipeapi.resource.documentation;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.recipe.recipeapi.models.User;
 import com.recipe.recipeapi.models.dto.UserDTO;
 import com.recipe.recipeapi.models.form.UserForm;
+import com.recipe.recipeapi.models.form.UserFormPut;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -32,7 +32,7 @@ public interface UserResourceDocumentation {
 	
 	@ApiOperation(value = "Update an user (you can also create here)")
 	@ApiResponse(code = 200, message = "Ok", response = User.class)
-	public UserDTO update(@RequestBody User user, @PathVariable UUID userId);
+	public UserDTO update(@RequestBody UserFormPut user);
 	
 	@ApiOperation(value = "Logical exclusion of an User")
 	@ApiResponse(code = 204, message = "Deleted")
