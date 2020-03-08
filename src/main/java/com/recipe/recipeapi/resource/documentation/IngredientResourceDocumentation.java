@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.recipe.recipeapi.models.Ingredient;
 import com.recipe.recipeapi.models.dto.IngredientDTO;
 import com.recipe.recipeapi.models.form.IngredientForm;
+import com.recipe.recipeapi.models.form.IngredientFormPut;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -38,5 +39,5 @@ public interface IngredientResourceDocumentation {
 	
 	@ApiOperation(value = "Update an ingredient (do you can create here)")
 	@ApiResponse(code = 204, message = "Ok", response = Ingredient.class)
-	public IngredientDTO update(@RequestBody Ingredient ingredient);
+	public IngredientDTO update(@RequestBody IngredientFormPut ingredient);
 }

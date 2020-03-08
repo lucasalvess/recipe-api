@@ -10,16 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recipe.recipeapi.models.Ingredient;
 import com.recipe.recipeapi.models.dto.IngredientDTO;
 import com.recipe.recipeapi.models.form.IngredientForm;
+import com.recipe.recipeapi.models.form.IngredientFormPut;
 import com.recipe.recipeapi.resource.documentation.IngredientResourceDocumentation;
 import com.recipe.recipeapi.service.IngredientService;
 
@@ -52,9 +52,9 @@ public class IngredientResource implements IngredientResourceDocumentation {
 		}
 	}
 	
-	@PatchMapping
-	public IngredientDTO update(@RequestBody Ingredient ingredient) {
-		return ingredientService.updateIngredient(ingredient);
+	@PutMapping
+	public IngredientDTO update(@RequestBody IngredientFormPut ingredient) {
+		return ingredientService.updateIngredient(ingredient.convertToEntity());
 	}
 
 }
