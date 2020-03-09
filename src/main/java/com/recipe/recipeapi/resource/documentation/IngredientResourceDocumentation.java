@@ -37,7 +37,7 @@ public interface IngredientResourceDocumentation {
 	@ApiResponse(code = 204, message = "Ok", response = Ingredient.class)
 	public void delete(@PathVariable UUID uuid, HttpServletResponse response);
 	
-	@ApiOperation(value = "Update an ingredient (do you can create here)")
+	@ApiOperation(value = "Update an ingredient")
 	@ApiResponse(code = 204, message = "Ok", response = Ingredient.class)
 	public IngredientDTO update(@RequestBody IngredientFormPut ingredient);
 }

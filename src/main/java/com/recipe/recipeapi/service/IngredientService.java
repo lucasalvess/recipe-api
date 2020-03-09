@@ -17,15 +17,15 @@ public class IngredientService {
 
 	@Autowired
 	private IngredientRepository ingredientRepository;
-	
+
 	private static final String UUID_NOT_FOUND = "UUID not found!";
-	
+
 	private static final IngredientDTO ingredientDTO = new IngredientDTO();
-	
+
 	public IngredientDTO createIngredient(Ingredient ingredient) {
 		return new IngredientDTO(ingredientRepository.save(ingredient));
 	}
-	
+
 	public IngredientDTO findIngredientByUuid(UUID uuid) {
 		try {
 			return new IngredientDTO(ingredientRepository.findByUuid(uuid));
@@ -53,16 +53,14 @@ public class IngredientService {
 		}
 	}
 
-	public IngredientDTO updateIngredient(Ingredient ingredient) {
+	public IngredientDTO updateIngredient(Ingredient ingredientForm) {
 		try {
-			Ingredient ingredientOld =ingredientRepository.findByUuid(ingredient.getUuid());
-			ingredientOld = ingredient;
-			return new IngredientDTO(ingredientRepository.save(ingredientOld));
+		Ingredient ingredient = ingredientRepository.findByUuid(ingredientForm.getUuid());
+		ingredient.setName(ingredientForm.getName());
+		return new IngredientDTO(ingredientRepository.save(ingredient));
 		}catch (RuntimeException e) {
-			throw new InvalidParametersException("Invalid Ingredient body");
+			throw new RuntimeException(e);
 		}
-		
 	}
-	
-	
+
 }
