@@ -19,7 +19,7 @@ import lombok.Data;
 @Data
 @Builder
 @Table(name="TB_RECIPE")
-public class Recipe extends Abstract implements Serializable{
+public class Recipe extends AbstractModel implements Serializable{
 	
 	private static final long serialVersionUID = -7169638148702718527L;
 	
