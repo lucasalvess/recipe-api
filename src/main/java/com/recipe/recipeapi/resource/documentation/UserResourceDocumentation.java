@@ -30,7 +30,7 @@ public interface UserResourceDocumentation {
 	@ApiResponse(code = 201, message = "Ok", response = User.class)
 	public UserDTO save(@RequestBody UserForm user);
 	
-	@ApiOperation(value = "Update an user (you can also create here)")
+	@ApiOperation(value = "Update an user")
 	@ApiResponse(code = 200, message = "Ok", response = User.class)
 	public UserDTO update(@RequestBody UserFormPut user);
 	

@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	public User findByLoginAndPassword(String login, String password);
 
-	public Optional<User> findByUuid(UUID uuid);
+	public User findByUuid(UUID uuid);
 
 }

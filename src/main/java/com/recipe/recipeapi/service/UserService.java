@@ -27,11 +27,11 @@ public class UserService {
 	private static final UserDTO userDTO = new UserDTO();
 
 	public UserDTO findByUuid(String uuid) {
-		Optional<User> user;
+		User user;
 
 		try {
 			user = userRepository.findByUuid(UUID.fromString(uuid));
-			return new UserDTO(user.get());
+			return new UserDTO(user);
 		} catch (Exception e) {
 			throw new NotFoundException(UUID_NOT_FOUND);
 		}
@@ -40,15 +40,15 @@ public class UserService {
 	public UserDTO updateUser(User userForm) {
 		try {
 
-			Optional<User> user = userRepository.findByUuid(userForm.getUuid());
+			User user = userRepository.findByUuid(userForm.getUuid());
 
-			user.get().setName(userForm.getName());
-			user.get().setLogin(userForm.getLogin());
-			user.get().setPassword(userForm.getPassword());
+			user.setName(userForm.getName());
+			user.setLogin(userForm.getLogin());
+			user.setPassword(userForm.getPassword());
 
-			return new UserDTO(userRepository.save(user.get()));
+			return new UserDTO(userRepository.save(user));
 		} catch (RuntimeException e) {
-			throw new RuntimeException(e);
+			throw new NotFoundException(UUID_NOT_FOUND);
 		}
 
 	}
@@ -63,7 +63,7 @@ public class UserService {
 		} catch (InvalidParameterException e) {
 			throw new InvalidParametersException("Invalid login and password");
 		} catch (RuntimeException e) {
-			throw new NotFoundException("User not found");
+			throw new NotFoundException("User credentials not found");
 		}
 
 	}
@@ -73,12 +73,14 @@ public class UserService {
 	}
 
 	public void deleteUser(String uuid) throws Exception {
-		Optional<User> user = userRepository.findByUuid(UUID.fromString(uuid));
+		try {
+			User user = userRepository.findByUuid(UUID.fromString(uuid));
 
-		if (!user.isPresent())
+			user.setDeleted(Boolean.TRUE);
+			userRepository.save(user);
+
+		} catch (RuntimeException e) {
 			throw new NotFoundException(UUID_NOT_FOUND);
-
-		user.get().setDeleted(Boolean.TRUE);
-		userRepository.save(user.get());
+		}
 	}
 }
