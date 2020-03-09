@@ -20,7 +20,7 @@ public class RecipeResource implements RecipeResourceDocumentation{
 	private RecipeService service;
 	
 	@GetMapping
-	public List<Recipe> list(){
+	public List<RecipeDTO> list(){
 		return service.findAllRecipes();
 	}
 }
