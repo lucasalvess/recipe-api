@@ -6,22 +6,20 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recipe.recipeapi.exception.InvalidParametersException;
 import com.recipe.recipeapi.exception.NotFoundException;
 import com.recipe.recipeapi.models.Ingredient;
 import com.recipe.recipeapi.models.dto.IngredientDTO;
 import com.recipe.recipeapi.repository.IngredientRepository;
+import com.recipe.recipeapi.utils.ConvertListUtils;
 
 @Service
 public class IngredientService {
-
+	
 	@Autowired
 	private IngredientRepository ingredientRepository;
 
-	private static final String UUID_NOT_FOUND = "UUID not found!";
-
-	private static final IngredientDTO ingredientDTO = new IngredientDTO();
-
+	private static final String UUID_NOT_FOUND = "UUID not found!";	
+	
 	public IngredientDTO createIngredient(Ingredient ingredient) {
 		return new IngredientDTO(ingredientRepository.save(ingredient));
 	}
@@ -36,7 +34,7 @@ public class IngredientService {
 
 	public List<IngredientDTO> listAllIngredients() {
 		try {
-			return ingredientDTO.convertAList(ingredientRepository.findAll());
+			return ConvertListUtils.convertIngredientToDtoList(ingredientRepository.findAll());
 		} catch (RuntimeException e) {
 			throw new NotFoundException("Ingredient list Empty");
 		}

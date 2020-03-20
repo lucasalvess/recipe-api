@@ -7,17 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.recipe.recipeapi.models.dto.RecipeDTO;
 import com.recipe.recipeapi.repository.RecipeRepository;
+import com.recipe.recipeapi.utils.ConvertListUtils;
 
 @Service
 public class RecipeService {
 	
 	@Autowired
 	private RecipeRepository recipeRepository;
-	
-	private static final RecipeDTO recipeDTO = new RecipeDTO();
 
 	public List<RecipeDTO> findAllRecipes() {
-		return recipeDTO.convertAList(recipeRepository.findAll());
+		return ConvertListUtils.convertRecipeToDtoList(recipeRepository.findAll());
 	}
 
 }

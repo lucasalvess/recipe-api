@@ -2,10 +2,7 @@ package com.recipe.recipeapi.service;
 
 import java.security.InvalidParameterException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-
-import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +12,7 @@ import com.recipe.recipeapi.exception.NotFoundException;
 import com.recipe.recipeapi.models.User;
 import com.recipe.recipeapi.models.dto.UserDTO;
 import com.recipe.recipeapi.repository.UserRepository;
+import com.recipe.recipeapi.utils.ConvertListUtils;
 
 @Service
 public class UserService {
@@ -23,8 +21,6 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	private static final UserDTO userDTO = new UserDTO();
 
 	public UserDTO findByUuid(String uuid) {
 		User user;
@@ -54,7 +50,7 @@ public class UserService {
 	}
 
 	public List<UserDTO> listUsers() {
-		return userDTO.convertAList(userRepository.findAll());
+		return ConvertListUtils.convertUserToDtoList(userRepository.findAll());
 	}
 
 	public UserDTO login(String login, String password) {
