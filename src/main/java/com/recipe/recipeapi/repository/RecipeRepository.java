@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.recipe.recipeapi.models.Recipe;
-import com.recipe.recipeapi.models.User;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {

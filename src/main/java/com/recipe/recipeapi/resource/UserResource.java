@@ -1,7 +1,6 @@
 package com.recipe.recipeapi.resource;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recipe.recipeapi.models.User;
 import com.recipe.recipeapi.models.dto.UserDTO;
 import com.recipe.recipeapi.models.form.UserForm;
 import com.recipe.recipeapi.models.form.UserFormPut;

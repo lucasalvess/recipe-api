@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recipe.recipeapi.models.Recipe;
+import com.recipe.recipeapi.models.dto.RecipeDTO;
 import com.recipe.recipeapi.resource.documentation.RecipeResourceDocumentation;
 import com.recipe.recipeapi.service.RecipeService;
 

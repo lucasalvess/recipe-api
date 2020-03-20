@@ -1,10 +1,8 @@
 package com.recipe.recipeapi.models.form;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import com.recipe.recipeapi.models.Ingredient;
 
