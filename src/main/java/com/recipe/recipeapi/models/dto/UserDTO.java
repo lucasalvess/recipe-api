@@ -1,8 +1,6 @@
 package com.recipe.recipeapi.models.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import com.recipe.recipeapi.models.User;
@@ -33,12 +31,5 @@ public class UserDTO implements Serializable {
 		this.name = user.getName();
 		this.login = user.getLogin();
 		this.password = user.getPassword();
-	}
-	
-	public List<UserDTO> convertAList(List<User> userList){
-		List<UserDTO> listDTO = new ArrayList<UserDTO>();
-
-		userList.forEach(u -> listDTO.add(new UserDTO(u)));
-		return listDTO;
 	}
 }

@@ -1,10 +1,9 @@
 package com.recipe.recipeapi.models.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.Locale.Category;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -59,12 +58,4 @@ public class RecipeDTO implements Serializable{
 		this.ingredients = recipe.getIngredients();
 		this.chef = recipe.getChef();
 	}
-	
-	public List<RecipeDTO> convertAList(List<Recipe> recipeList){
-		List<RecipeDTO> listDTO = new ArrayList<RecipeDTO>();
-
-		recipeList.forEach(r -> listDTO.add(new RecipeDTO(r)));
-		return listDTO;
-	}
-
 }
