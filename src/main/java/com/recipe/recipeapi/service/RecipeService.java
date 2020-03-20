@@ -23,8 +23,8 @@ public class RecipeService {
 	
 	private static final String UUID_NOT_FOUND = "UUID not found!";	 
 
-	public List<RecipeDTO> findAllRecipes() {
-		return ConvertListUtils.convertRecipeToDtoList(recipeRepository.findAll());
+	public List<RecipeDTO> findRecipesByChef(Long id) {
+		return ConvertListUtils.convertRecipeToDtoList(recipeRepository.findByUser(id));
 	}
 	
 	public RecipeDTO findRecipeByUuid(UUID uuid) {

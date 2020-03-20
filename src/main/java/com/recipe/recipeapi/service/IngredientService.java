@@ -53,10 +53,10 @@ public class IngredientService {
 
 	public IngredientDTO updateIngredient(Ingredient ingredientForm) {
 		try {
-		Ingredient ingredient = ingredientRepository.findByUuid(ingredientForm.getUuid());
-		ingredient.setName(ingredientForm.getName());
-		return new IngredientDTO(ingredientRepository.save(ingredient));
-		}catch (RuntimeException e) {
+			Ingredient ingredient = ingredientRepository.findByUuid(ingredientForm.getUuid());
+			ingredient.setName(ingredientForm.getName());
+			return new IngredientDTO(ingredientRepository.save(ingredient));
+		} catch (RuntimeException e) {
 			throw new RuntimeException(e);
 		}
 	}
