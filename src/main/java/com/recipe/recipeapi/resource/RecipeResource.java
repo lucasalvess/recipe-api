@@ -30,7 +30,7 @@ public class RecipeResource implements RecipeResourceDocumentation{
 	private RecipeService service;
 	
 	@GetMapping
-	public List<RecipeDTO> listByChef(Long id){
+	public List<RecipeDTO> listByChef(@PathVariable Long id){
 		return service.findRecipesByChef(id);
 	}
 	
