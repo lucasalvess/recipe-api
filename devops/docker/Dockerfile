@@ -1,9 +1,12 @@
-FROM gradle:jdk11
+FROM gradle:jdk8-alpine AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build --no-daemon
 
-COPY . .
-
-RUN ./gradlew build
+FROM openjdk:11-jre-slim
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar" ,"build/libs/recipe-api-0.0.1-SNAPSHOT.jar"]
+COPY --from=build /home/gradle/src/build/libs/*.jar /app.jar
+
+ENTRYPOINT ["java","-jar","/app.jar"]
