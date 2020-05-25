@@ -19,3 +19,15 @@ On console:
 *Windows:*
 
 `./gradlew.bat build clean`
+
+## Run with docker-compose
+
+*require docker installed*
+
+- In project folder access docker directory `cd devops/docker`
+
+- Run `sudo docker-compose up -d --build`
+
+## Documentation
+
+- Endpoints / Swagger: http://localhost:8080/api/swagger-ui.html
